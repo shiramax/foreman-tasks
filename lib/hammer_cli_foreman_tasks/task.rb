@@ -38,6 +38,27 @@ module HammerCLIForemanTasks
       build_options
     end
 
+    class InfoCommand < HammerCLIForeman::InfoCommand
+
+      output do
+
+        field :id, _('ID')
+        field :action, _('Name')
+        field :username, _('Owner')
+        field :started_at, _('Started at'), Fields::Date
+        field :ended_at, _('Ended at'), Fields::Date
+        field :state, _('State')
+        field :result, _('Result')
+        from :humanized do
+          field :action, _('Task action')
+          field :errors, _('Task errors'), Fields::List, :hide_blank => true
+        end
+
+      end
+      build_options
+
+    end
+
     class ResumeCommand < HammerCLIForeman::InfoCommand
       action :bulk_resume
 
